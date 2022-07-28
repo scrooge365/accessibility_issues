@@ -1,5 +1,0 @@
-- add on container role nav for better notice that its a navigation
-- add arial-label for the nav (container)
-- change styling
-  - mobile device flex-wrapping
-  - hover & focus styling
