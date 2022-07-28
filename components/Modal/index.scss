@@ -69,15 +69,3 @@
     }
   }
 }
-
-*:focus {
-  outline: 1px solid black;
-  outline-offset: 2px;
-}
-
-[data-whatintent="mouse"],
-[data-whatintent="touch"] {
-  *:focus {
-    outline: none !important;
-  }
-}

@@ -29,21 +29,34 @@ body {
   box-sizing: border-box; // Width is not affected by padding or border
 }
 
+*:focus {
+  outline: 2px solid rgba(0, 0, 0, 0.8);
+  outline-offset: 4px;
+  outline-style: auto;
+}
+
+[data-whatintent="mouse"],
+[data-whatintent="touch"] {
+  *:focus {
+    outline: none !important;
+  }
+}
+
 details {
   border: 1px solid black;
-  padding: .5rem .5rem 0 .5rem;
-  margin-top: .5rem;
+  padding: 0.5rem 0.5rem 0 0.5rem;
+  margin-top: 0.5rem;
 }
 
 summary {
   font-weight: bold;
-  margin: -.5rem -.5rem 0;
-  padding: .5rem;
+  margin: -0.5rem -0.5rem 0;
+  padding: 0.5rem;
   background-color: #eaeaea;
 }
 
 details[open] {
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 details[open] summary {
