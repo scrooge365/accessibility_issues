@@ -65,9 +65,8 @@ export default function Modal() {
                 href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/dialog_role"
                 aria-label="Redirect to dialog role documentation"
               >
-                Click here
-              </a>{" "}
-              to learn more.
+                Click here to learn more.
+              </a>
             </p>
             <button
               type="button"
