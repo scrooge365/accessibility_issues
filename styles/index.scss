@@ -1,17 +1,19 @@
-@import './variables/containers';
-@import './variables/grid';
+@import "./variables/containers";
+@import "./variables/grid";
 
-@import './mixins/breakpoints';
-@import './mixins/grid';
+@import "./mixins/breakpoints";
+@import "./mixins/grid";
 
-@import './base';
-@import './grid';
+@import "./base";
+@import "./grid";
 
-@import '../core-components/Header/';
-@import '../components/Accordion/';
-@import '../components/Accordion/Accessible';
+@import "../core-components/Header/";
+@import "../components/Accordion/";
+@import "../components/Accordion/Accessible";
 
-@import '../components/Breadcrumb';
-@import '../components/Breadcrumb/Accessible';
+@import "../components/Breadcrumb";
+@import "../components/Breadcrumb/Accessible";
 
-@import '../components/Modal';
+@import "../components/Modal";
+@import "../components/Checkbox";
+@import "../components/Tabs";

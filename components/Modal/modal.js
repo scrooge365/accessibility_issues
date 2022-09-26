@@ -68,16 +68,16 @@ export default function Modal() {
                 Click here to learn more.
               </a>
             </p>
-            <button
-              type="button"
-              id="modal-1-close-btn"
-              className="modal__close-btn"
-              onClick={handleCloseButtonClick}
-              aria-label="Close modal"
-            >
-              <span dangerouslySetInnerHTML={{ __html: "&#215;" }} />
-            </button>
           </div>
+          <button
+            type="button"
+            id="modal-1-close-btn"
+            className="modal__close-btn"
+            onClick={handleCloseButtonClick}
+            aria-label="Close modal"
+          >
+            <span dangerouslySetInnerHTML={{ __html: "&#215;" }} />
+          </button>
         </div>
       </div>
     </>
