@@ -23,21 +23,30 @@ export default function Tabs() {
 
   const handleTablistClick = (id) => setActivePanelId(id);
 
-  const isPanelActive = (id) => id === activePanelId;
+  const handleKeyPress = (e, id) => {
+    if (e.key === "Enter") {
+      handleTablistClick(id);
+    }
+  };
 
   return (
     <div className="tabs">
-      <ul className="tabs__list">
+      <ul className="tabs__list" role="tablist">
         {data.map(({ id, title }) => (
           <li
-            data-tabpanel-id={id}
             key={id}
+            id={id}
+            role="tab"
+            aria-controls={id}
+            aria-selected={`${id === activePanelId}`}
+            data-tabpanel-id={id}
             onClick={() => handleTablistClick(id)}
             onMouseEnter={() => handleTablistClick(id)}
+            onKeyDown={(e) => handleKeyPress(e, id)}
             tabIndex={0}
             className={`
               tabs__list-item
-              ${isPanelActive(id) ? "tabs__list-item--active" : ""}
+              ${id === activePanelId ? "tabs__list-item--active" : ""}
             `}
           >
             {title}
@@ -55,14 +64,15 @@ export default function Tabs() {
         end development. The most popular are React, Vue, and Angular.
       </p>
 
-      <div className="tabs__panel-container">
+      <div className="tabs__panel-container" role="tabpanel">
         {data.map(({ id, text }) => (
           <div
+            aria-labelledby={id}
             key={id}
             id={id}
             className={`
               tabs__panel
-              ${isPanelActive(id) ? "tabs__panel--active" : ""}
+              ${id === activePanelId ? "tabs__panel--active" : ""}
             `}
             dangerouslySetInnerHTML={{ __html: text }}
           />

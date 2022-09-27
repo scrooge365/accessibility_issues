@@ -12,22 +12,16 @@
 
     &--active {
       color: rgb(0, 0, 180);
-      // border-bottom: 1px solid rgb(230, 230, 230)
       border-bottom: 2px solid black;
     }
   }
 
   &__panel {
-    position: absolute;
     overflow: hidden;
-    left: -9999px;
-    top: -9999px;
-    opacity: 0;
-    max-height: 100px;
+    display: none;
 
     &--active {
-      opacity: 1;
-      position: static;
+      display: block;
     }
 
     a {
