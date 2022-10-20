@@ -72,6 +72,9 @@ export default function Home() {
           <li>
             <Link href="/page-tabs">Tabs</Link>
           </li>
+          <li>
+            <Link href="/page-radio">Radio group</Link>
+          </li>
         </ul>
       </Layout>
     </>
