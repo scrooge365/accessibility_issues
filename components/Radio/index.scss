@@ -1,25 +1,33 @@
 .radios {
   background-color: rgb(237, 237, 237);
   padding: 1rem;
-  color: rgb(114, 92, 92);
+  color: black;
 
   .radio-group {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 
-    &__item {
-      padding-right: .2rem;
+    &__wrapper {
+      cursor: pointer;
 
       &:focus {
         outline: 1px solid rgb(46, 46, 46);
       }
+    }
 
+    &__item {
+      margin-right: 0.2rem;
+    }
+
+    &__label {
+      cursor: pointer;
     }
 
     &__submit {
       margin-top: 1rem;
-      padding: .5rem 1rem;
-      color: rgb(135, 112, 112);
+      padding: 0.5rem 1rem;
+      cursor: pointer;
 
       &:focus {
         outline: 1px solid rgb(46, 46, 46);

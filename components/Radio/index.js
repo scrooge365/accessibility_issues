@@ -1,60 +1,119 @@
-import { useState } from "react";
+import React from "react";
 
-export default function RadioGroup() {
-  const options = [
-    { name: "email", id: 1, label: "Email" },
-    { name: "phone", id: 2, label: "Phone" },
-    { name: "mail", id: 3, label: "Mail" },
-  ];
+const options = [
+  { name: "email", id: 1, label: "Email" },
+  { name: "phone", id: 2, label: "Phone" },
+  { name: "mail", id: 3, label: "Mail" },
+];
 
-  const [checkedList, setCheckedList] = useState(options);
-
-  const changeList = (id, checked) => {
-    const newCheckedList = toggleOption(id, checked);
-    setCheckedList(newCheckedList);
-  };
-
-  const toggleOption = (id, checked) => {
-    return options.map((option) =>
-      option.id === id ? { ...option, checked } : option
-    );
-  };
+const RadioGroup = () => {
+  const [checkedItem, setCheckedItem] = React.useState();
+  const radioRef = React.useRef([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(checkedList);
+    console.log(checkedItem);
   };
+
+  const handleSetActiveRadio = (e) => setCheckedItem(e.target.value);
+
+  const changeFocusRadio = React.useCallback(
+    (item) => {
+      let index = options.findIndex((item) => `${item.id}` === checkedItem);
+
+      if (item === "next") {
+        index = index === radioRef.current.length - 1 ? 0 : index + 1;
+      } else if (item === "prev") {
+        index = index <= 0 ? radioRef.current.length - 1 : index - 1;
+      }
+
+      console.log("***", radioRef.current[index]);
+
+      setCheckedItem(radioRef.current[index].dataset.id);
+      radioRef.current[index].focus();
+    },
+    [checkedItem]
+  );
+
+  const handleKeyPress = (e) => {
+    switch (e.key) {
+      case "ArrowDown": {
+        e.preventDefault();
+        changeFocusRadio("next");
+      }
+      case "ArrowUp": {
+        e.preventDefault();
+        changeFocusRadio("prev");
+      }
+      default: {
+        break;
+      }
+    }
+  };
+
+  const isActive = (index) =>
+    (!checkedItem && index === 0) || checkedItem === `${options[index].id}`;
 
   return (
     <section className="radios">
-      <div>
-        <h4>Please select your preferred contact method</h4>
-        <div className="radio-group">
-          {checkedList.map(({ id, name, checked, label }) => (
-            <div key={id}>
+      <fieldset
+        className="radio-group"
+        role="radiogroup"
+        aria-labelledby="radio-title"
+      >
+        <legend id="radio-title">
+          Please select your preferred contact method
+        </legend>
+        {options.map(({ id, name, label }, index) => {
+          const value = `${id}`;
+          return (
+            <div
+              key={id}
+              className="radio-group__wrapper"
+              onKeyDown={handleKeyPress}
+            >
               <input
                 type="radio"
                 name={name}
-                value={id}
-                id={id}
-                checked={checked}
-                onChange={(e) => changeList(id, e.target.checked)}
+                value={value}
+                aria-checked={checkedItem === value}
+                aria-labelledby={id}
+                data-id={value}
+                id={`${id}-${index}`}
+                checked={checkedItem === value}
+                onChange={handleSetActiveRadio}
+                onFocus={handleSetActiveRadio}
+                tabIndex={isActive(index) ? "0" : "-1"}
                 className="radio-group__item"
+                ref={(el) => {
+                  radioRef.current[index] = el;
+                }}
               />
-              <label className="radio-group__label">{label}</label>
+              <label
+                id={id}
+                htmlFor={`${id}-${index}`}
+                className="radio-group__label"
+              >
+                {label}
+              </label>
             </div>
-          ))}
-        </div>
-        <div>
-          <button
-            type="button"
-            className="radio-group__submit"
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
-        </div>
+          );
+        })}
+      </fieldset>
+      <div>
+        <button
+          type="button"
+          className="radio-group__submit"
+          onKeyDown={(e) => {
+            e.key === "Enter" && handleSubmit(e);
+          }}
+          onClick={handleSubmit}
+        >
+          Submit
+        </button>
       </div>
     </section>
   );
-}
+};
+
+export default RadioGroup;
