@@ -36,10 +36,18 @@ const RadioGroup = () => {
   const handleKeyPress = (e) => {
     e.preventDefault();
 
-    if (e.key === "ArrowDown") {
-      changeFocusRadio("next");
-    } else if (e.key === "ArrowUp") {
-      changeFocusRadio("prev");
+    switch (e.key) {
+      case "ArrowDown": {
+        changeFocusRadio("next");
+        break;
+      }
+      case "ArrowUp": {
+        changeFocusRadio("prev");
+        break;
+      }
+      default: {
+        break;
+      }
     }
   };
 
