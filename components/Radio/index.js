@@ -23,11 +23,9 @@ const RadioGroup = () => {
 
       if (item === "next") {
         index = index === radioRef.current.length - 1 ? 0 : index + 1;
-      } else if (item === "prev") {
+      } else {
         index = index <= 0 ? radioRef.current.length - 1 : index - 1;
       }
-
-      console.log("***", radioRef.current[index]);
 
       setCheckedItem(radioRef.current[index].dataset.id);
       radioRef.current[index].focus();
@@ -36,18 +34,12 @@ const RadioGroup = () => {
   );
 
   const handleKeyPress = (e) => {
-    switch (e.key) {
-      case "ArrowDown": {
-        e.preventDefault();
-        changeFocusRadio("next");
-      }
-      case "ArrowUp": {
-        e.preventDefault();
-        changeFocusRadio("prev");
-      }
-      default: {
-        break;
-      }
+    e.preventDefault();
+
+    if (e.key === "ArrowDown") {
+      changeFocusRadio("next");
+    } else if (e.key === "ArrowUp") {
+      changeFocusRadio("prev");
     }
   };
 
@@ -70,7 +62,7 @@ const RadioGroup = () => {
             <div
               key={id}
               className="radio-group__wrapper"
-              onKeyDown={handleKeyPress}
+              onKeyDown={(e) => handleKeyPress(e)}
             >
               <input
                 type="radio"
